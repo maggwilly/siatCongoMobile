@@ -1,0 +1,32 @@
+<ion-header>
+  <ion-navbar>
+     <button menuToggle ion-button icon-only>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    <ion-title>Points de vente</ion-title>
+    <ion-buttons end>
+        <button ion-button   (click)="startUpload()" icon-only> 
+              <ion-icon name="cloud-upload"></ion-icon>
+             </button>      
+      <button ion-button icon-only (click)="loadRemoteData()">
+        <ion-icon name="refresh"></ion-icon>
+      </button>
+    </ion-buttons>
+  </ion-navbar>
+</ion-header>
+<ion-content>
+     <ion-searchbar color="primary"
+                   [(ngModel)]="queryText"
+                   (ionInput)="search()"
+                   placeholder="search">
+    </ion-searchbar> 
+  <ion-list>
+    <ion-item  *ngFor="let pointVente of pointVentes" (click)="startVisite(pointVente)" [hidden]="pointVente.hide">
+      <h2>{{pointVente.nom}}</h2>
+      <p>{{pointVente.tel}}<span *ngIf="pointVente.quartier">, {{pointVente.quartier}}</span><span *ngIf="pointVente.type">, {{pointVente.type}}</span></p>
+    </ion-item>
+  </ion-list>
+  <ion-fab right bottom>
+      <button ion-fab color="primary" (click)="createPdv()"><ion-icon name="add" ></ion-icon></button>
+    </ion-fab>
+</ion-content>

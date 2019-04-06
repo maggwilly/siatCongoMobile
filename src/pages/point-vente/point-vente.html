@@ -1,0 +1,50 @@
+<ion-header>
+
+    <ion-navbar>    
+      <ion-title>Nouveau P.D.V</ion-title>
+      <ion-buttons end>
+            <button ion-button (click)="dismiss()" icon-left>
+              <ion-icon name="md-close" showWhen="android,windows"></ion-icon>
+              <span color="primary" showWhen="android,ios">Fermer</span>
+            </button>
+          </ion-buttons>   
+    </ion-navbar>
+  </ion-header>
+  <ion-content padding>
+    <form #form="ngForm"   novalidate>
+  <ion-list >
+    <ion-item >
+   <ion-label color="primary" floating><span >Nom du point de vente</span> </ion-label>
+      <ion-input [(ngModel)]="pointVente.nom" name="nom" type="text" placeholder="" #nom="ngModel"></ion-input>
+    </ion-item> 
+     <ion-item >
+      <ion-label color="primary" >Type </ion-label>
+     <ion-select   [(ngModel)]="pointVente.type" name="type" #type="ngModel" required>
+           <ion-option  value="Boutiques">Boutiques</ion-option> 
+           <ion-option  value="Kiosques" selected>Kiosques</ion-option>
+           <ion-option  value="Caves">Caves</ion-option>
+            <ion-option value="Bar/Nganda/Malewa">Bar/Nganda/Malewa</ion-option> 
+     </ion-select>
+    </ion-item> 
+
+    <ion-item (click)="select()" >
+   <ion-label color="primary" ><span >Quartier</span> </ion-label>
+      <ion-input  [(ngModel)]="pointVente.quartier" name="quartier" type="text" placeholder="" #quartier="ngModel"></ion-input>
+    </ion-item> 
+     <ion-item >
+   <ion-label color="primary"> <span >Télephone</span> </ion-label>
+      <ion-input [(ngModel)]="pointVente.tel" name="tel" type="tel" placeholder="" #tel="ngModel"></ion-input>
+  </ion-item>  
+    <ion-item >
+        <ion-textarea rows="2" [(ngModel)]="pointVente.description" placeholder="Description du lieu par rapport à un endroit connu" name="description" #description="ngModel"></ion-textarea>
+    </ion-item>
+   <p text-center *ngIf="lat && long">lat: {{lat}}, long: {{long}}</p>
+   <p text-center *ngIf="!lat || !long">Localisation ...</p>
+     </ion-list>
+    <div padding>
+    <button ion-button block  icon-right  [disabled]="isInvalid()" (click)="onSubmit()" > 
+      <span >Enrégistrer  <ion-icon name="md-done-all"></ion-icon></span>    
+    </button>      
+    </div>
+     </form>
+  </ion-content>
